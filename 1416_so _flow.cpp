@@ -92,6 +92,7 @@ int main()
         edges.push_back({a,b,weight});
     }
 
+    pair<int,int> edge_remove = {0,0};
 
     for(auto edge:edges)
     {
@@ -114,14 +115,21 @@ int main()
             graph[b].erase(it);
         }
 
-        mine = min(mine, ford_fulkerson(n,s,t,graph,duplac));
+        int rez = ford_fulkerson(n,s,t,graph,duplac);
+        if ( rez < mine)
+        {
+            edge_remove.first = edge[0];
+            edge_remove.second = edge[1];
+            mine = rez; 
+        }
         
         graph[a].push_back(b);
         graph[b].push_back(a);
         duplac[a][b] = thisc;
     }
     
-    cout << mine;
+    cout << mine << endl;
+    cout << edge_remove.first << ' ' << edge_remove.second;
 
     return 0;
 }
