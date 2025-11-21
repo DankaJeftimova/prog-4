@@ -13,7 +13,7 @@ void push(int u, int v) {
     int d = min(excess[u], capacity[u][v] - flow[u][v]);
     flow[u][v] += d;
     flow[v][u] -= d;
-    excess[u] -= d;
+    excess[u] -= d; 
     excess[v] += d;
     if (d && excess[v] == d)
         excess_vertices.push(v);
